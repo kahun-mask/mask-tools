@@ -1,0 +1,23 @@
+{
+  "name": "@mask-tools/web-authn",
+  "version": "0.0.0",
+  "description": "web authn typings",
+  "keywords": [
+    "webauthn"
+  ],
+  "author": "kahun-mask <kahun.mask@gmail.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/web-authn.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}

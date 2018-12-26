@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "jsx": "react",
+    "outDir": "lib",
+    "rootDir": "src",
+    "lib": [
+      "dom",
+      "es2015",
+      "es5",
+      "es6"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
