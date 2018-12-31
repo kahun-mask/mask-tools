@@ -3,9 +3,6 @@ interface Dictinary<T> {
 }
 
 declare module '@mask-tools/web-authn' {
-  interface Navigator {
-    credentials: CredentialsContainer;
-  }
 
   export interface CredentialsContainer {
     create<T = AuthenticatorAttestationResponse>(options?: CredentialCreationOptions): Promise<T & Credential>;
@@ -36,7 +33,7 @@ declare module '@mask-tools/web-authn' {
   export interface AuthenticatorResponse {
     readonly clientDataJSON: ArrayBuffer;
   }
-  
+
   export interface AuthenticatorAttestationResponse extends AuthenticatorResponse {
     readonly attestationObject: ArrayBuffer;
   }
@@ -187,4 +184,5 @@ declare module '@mask-tools/web-authn' {
     name: string;
     icon: string;
   }
+
 }
