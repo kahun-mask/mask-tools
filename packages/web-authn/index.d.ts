@@ -1,3 +1,5 @@
+import { AuthenticatorAttestationResponse } from "@mask-tools/web-authn";
+
 interface Dictinary<T> {
   [index: string]: T;
 }
@@ -5,15 +7,15 @@ interface Dictinary<T> {
 declare module '@mask-tools/web-authn' {
 
   export interface CredentialsContainer {
-    create<T = AuthenticatorAttestationResponse>(options?: CredentialCreationOptions): Promise<T & Credential>;
-    get<T = AuthenticatorAssertionResponse>(options?: CredentialRequestOptions): Promise<T & Credential>;
+    create<T>(options?: CredentialCreationOptions): Promise<T & Credential>;
+    get<T>(options?: CredentialRequestOptions): Promise<T & Credential>;
     store(credential: Credential): Promise<Credential>;
     preventSilentAccess(): Promise<void>;
   }
 
-  export interface PublicKeyCredential extends Credential {
+  export interface PublicKeyCredential<T> extends Credential {
     readonly rawId: ArrayBuffer;
-    readonly response: AuthenticatorResponse;
+    readonly response: T;
     getClientExtensionResults(): AuthenticationExtensionsClientOutputs;
   }
 
@@ -52,7 +54,7 @@ declare module '@mask-tools/web-authn' {
   export interface PublicKeyCredentialCreationOptions {
     rp: PublicKeyCredentialRpEntity;
     user: PublicKeyCredentialUserEntity;
-    challenge: BufferSource;
+    challenge: ArrayBuffer;
     pubKeyCredParams: PublicKeyCredentialParameters[];
     timeout?: number; // unsigned long: 0 ～ 18446744073709551615
     excludeCredentials?: PublicKeyCredentialDescriptor[];
@@ -73,7 +75,7 @@ declare module '@mask-tools/web-authn' {
    * User Account Parameters for Credential Generation
    */
   export interface PublicKeyCredentialUserEntity {
-    id: BufferSource;
+    id: ArrayBuffer;
     name?: string;
     displayName?: string;
   }
@@ -102,7 +104,7 @@ declare module '@mask-tools/web-authn' {
    */
   export interface PublicKeyCredentialDescriptor {
     type: PublicKeyCredentialType;
-    id: BufferSource;
+    id: ArrayBuffer;
     transports: AuthenticatorTransport[];
   }
 
@@ -152,7 +154,7 @@ declare module '@mask-tools/web-authn' {
 
 
   export interface PubicKeyCredentialRequestOptions {
-    challenge: BufferSource;
+    challenge: ArrayBuffer;
     timeout?: number;
     rpId?: string;
     allowCredentials?: PublicKeyCredentialDescriptor[];
@@ -185,4 +187,13 @@ declare module '@mask-tools/web-authn' {
     icon: string;
   }
 
+  export interface AttestationFmtPackedObject {
+    fmt: 'packed';
+    attStmt: {
+      alg: number;
+      sig: Buffer;
+      x5c: Buffer[];
+    };
+    authData: Buffer;
+  }
 }

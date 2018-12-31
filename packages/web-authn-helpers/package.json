@@ -1,0 +1,29 @@
+{
+  "name": "@mask-tools/web-authn-helpers",
+  "version": "0.0.0",
+  "description": "Relying Party’s helpers",
+  "author": "kahun-mask <kahun.mask@gmail.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/web-authn-helpers.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@mask-tools/base64-arraybuffer": "^0.0.0",
+    "@mask-tools/web-authn": "^0.0.0",
+    "base64url": "^3.0.1",
+    "cbor": "^4.1.4"
+  },
+  "devDependencies": {
+    "@types/base64url": "^2.0.0",
+    "@types/cbor": "^2.0.0"
+  }
+}
