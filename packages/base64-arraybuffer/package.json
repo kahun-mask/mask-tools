@@ -5,8 +5,8 @@
   "author": "kahun-mask <kahun.mask@gmail.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "lib/base64-arraybuffer.js",
-  "types": "lib/base64-arraybuffer.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib"
   },

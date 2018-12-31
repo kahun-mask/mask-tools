@@ -3,12 +3,18 @@ import {
   AuthenticationExtensionsClientInputs,
   AuthenticatorSelectionCriteria,
   AuthenticatorTransport,
+  Credential,
   PublicKeyCredentialDescriptor,
   PublicKeyCredentialParameters,
   PublicKeyCredentialRpEntity,
   PublicKeyCredentialType,
   UserVerificationRequirement,
 } from '@mask-tools/web-authn';
+
+export interface StringedPublicKeyCredential<T> extends Credential {
+  readonly rawId: string;
+  readonly response: T;
+}
 
 export interface StringedPublicKeyCredentialCreationOptions {
   challenge: string;

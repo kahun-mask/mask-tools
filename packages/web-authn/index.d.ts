@@ -1,4 +1,4 @@
-import { AuthenticatorAttestationResponse } from "@mask-tools/web-authn";
+import { AuthenticatorAttestationResponse } from '@mask-tools/web-authn';
 
 interface Dictinary<T> {
   [index: string]: T;

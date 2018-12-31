@@ -1,12 +1,12 @@
 import {
-  encode,
   decode,
+  encode,
 } from '@mask-tools/base64-arraybuffer';
 import {
   AuthenticatorAssertionResponse,
   AuthenticatorAttestationResponse,
-  PublicKeyCredential,
   PubicKeyCredentialRequestOptions,
+  PublicKeyCredential,
   PublicKeyCredentialCreationOptions,
   PublicKeyCredentialUserEntity,
 } from '@mask-tools/web-authn';
@@ -14,6 +14,7 @@ import {
   StringedAuthenticatorAssertionResponse,
   StringedAuthenticatorAttestationResponse,
   StringedPubicKeyCredentialRequestOptions,
+  StringedPublicKeyCredential,
   StringedPublicKeyCredentialCreationOptions,
 } from './types';
 
@@ -34,8 +35,8 @@ export const preformatCredentialRequest = (
 
   return {
     ...options,
-    user,
     challenge,
+    user,
   };
 
 };
@@ -67,7 +68,10 @@ export const preformatAssertionRequest = (
 
 export const authenticatorAttestationResponseToJSON = (
   publicKeyCredential: PublicKeyCredential<AuthenticatorAttestationResponse>,
-): PublicKeyCredential<StringedAuthenticatorAttestationResponse> => {
+): StringedPublicKeyCredential<StringedAuthenticatorAttestationResponse> => {
+
+  const { id, type } = publicKeyCredential;
+  const rawId = encode(publicKeyCredential.rawId);
 
   const attestationObject: string = encode(
     publicKeyCredential.response.attestationObject,
@@ -77,22 +81,26 @@ export const authenticatorAttestationResponseToJSON = (
   );
 
   return {
-    ...publicKeyCredential,
+    id,
+    rawId,
     response: {
       attestationObject,
       clientDataJSON,
     },
+    type,
   };
 
 };
 
 export const authenticatorAssertionResponseToJSON = (
   publicKeyCredential: PublicKeyCredential<AuthenticatorAssertionResponse>,
-): PublicKeyCredential<StringedAuthenticatorAssertionResponse> => {
+): StringedPublicKeyCredential<StringedAuthenticatorAssertionResponse> => {
 
+  const { id, type } = publicKeyCredential;
+  const rawId = encode(publicKeyCredential.rawId);
   const authenticatorData: string = encode(
     publicKeyCredential.response.authenticatorData,
-    );
+  );
   const signature: string = encode(publicKeyCredential.response.signature);
   const userHandle: string = encode(publicKeyCredential.response.userHandle);
   const clientDataJSON: string = encode(
@@ -100,13 +108,15 @@ export const authenticatorAssertionResponseToJSON = (
   );
 
   return {
-    ...publicKeyCredential,
+    id,
+    rawId,
     response: {
       authenticatorData,
       clientDataJSON,
       signature,
       userHandle,
     },
+    type,
   };
 
 };

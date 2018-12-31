@@ -32,14 +32,14 @@ export const createRandomBuffer = (length: number = 32): ArrayBuffer => {
 };
 
 export const createCredentialRequestOptions = (
-  authenticators: PublicKeyCredentialDescriptor[],
+  authenticators: AuthenticatorInfo[],
   rpId?: string,
   userVerification?: UserVerificationRequirement,
 ): PubicKeyCredentialRequestOptions => {
   const allowCredentials: PublicKeyCredentialDescriptor[] = [];
   for (const authr of authenticators) {
     allowCredentials.push({
-      id: authr.id,
+      id: base64url.toBuffer(authr.id),
       transports: ['usb', 'nfc', 'ble'],
       type: 'public-key'
     });
@@ -53,7 +53,7 @@ export const createCredentialRequestOptions = (
 };
 
 export const createStringedCredentialRequestOptions = (
-  authenticators: PublicKeyCredentialDescriptor[],
+  authenticators: AuthenticatorInfo[],
   rpId?: string,
   userVerification?: UserVerificationRequirement,
 ): StringedPubicKeyCredentialRequestOptions => {
@@ -78,7 +78,6 @@ export const createStringedCredentialRequestOptions = (
   );
 
   return {
-    ...allowCredentials,
     allowCredentials,
     challenge,
   };

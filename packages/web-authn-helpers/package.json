@@ -5,7 +5,8 @@
   "author": "kahun-mask <kahun.mask@gmail.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "lib/web-authn-helpers.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib"
   },
