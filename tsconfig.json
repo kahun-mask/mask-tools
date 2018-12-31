@@ -8,12 +8,11 @@
     "strictFunctionTypes": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
+    "declaration": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
-    "outDir": "lib",
-    "rootDir": "src",
     "lib": [
       "dom",
       "es2015",

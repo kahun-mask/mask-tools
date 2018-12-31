@@ -1,0 +1,20 @@
+{
+  "name": "@mask-tools/base64-arraybuffer",
+  "version": "0.0.0",
+  "description": "Base64 encode and decode",
+  "author": "kahun-mask <kahun.mask@gmail.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/base64-arraybuffer.js",
+  "types": "lib/base64-arraybuffer.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}
