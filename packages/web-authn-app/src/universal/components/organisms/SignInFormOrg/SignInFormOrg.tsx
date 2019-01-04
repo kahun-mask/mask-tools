@@ -1,4 +1,9 @@
 import * as React from 'react';
+import {
+  Button,
+  Container,
+  Form,
+} from 'semantic-ui-react';
 
 interface Props {
   onSubmit(username: string): void;
@@ -31,19 +36,25 @@ export class SignInFormOrg extends React.PureComponent<Props, State> {
   public render(): React.ReactNode {
     const { username } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="username">
-          username:
-          <input
-            name="username"
-            onChange={this.handleChange}
-            type="text"
-            value={username}
-          />
-        </label>
+      <Container>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <label htmlFor="signin_username">
+              username:
+            </label>
+            <input
+              id="signin_username"
+              name="username"
+              placeholder="username"
+              onChange={this.handleChange}
+              type="text"
+              value={username}
+            />
+          </Form.Field>
 
-        <input type="submit" value="sign in" />
-      </form>
+          <Button type="submit">Sign in</Button>
+        </Form>
+      </Container>
     );
   }
 

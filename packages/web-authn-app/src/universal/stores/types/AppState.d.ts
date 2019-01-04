@@ -13,4 +13,10 @@ declare namespace AppState {
 
   type AuthenticationPayload = DeepPartial<AuthenticationState>;
 
+  interface UseragentState {
+    webAuthnSupported: boolean;
+  }
+
+  type UseragentPayload = DeepPartial<UseragentState>;
+
 }

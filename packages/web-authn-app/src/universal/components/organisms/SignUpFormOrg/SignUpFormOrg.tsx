@@ -1,4 +1,9 @@
 import * as React from 'react';
+import {
+  Button,
+  Container,
+  Form,
+} from 'semantic-ui-react';
 
 interface Props {
   onSubmit(displayName: string, username: string): void;
@@ -43,28 +48,39 @@ export class SignUpFormOrg extends React.PureComponent<Props, State> {
   public render(): React.ReactNode {
     const { displayName, username } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="displayName">
-          username:
-          <input
-            name="displayName"
-            onChange={this.handleDisplayNameChange}
-            type="text"
-            value={displayName}
-          />
-        </label>
-        <label htmlFor="username">
-          username:
-          <input
-            name="username"
-            onChange={this.handleUsernameChange}
-            type="text"
-            value={username}
-          />
-        </label>
+      <Container>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <label htmlFor="signup_displayName">
+              displayName:
+            </label>
+            <input
+              id="signup_displayName"
+              name="displayName"
+              placeholder="display name"
+              onChange={this.handleDisplayNameChange}
+              type="text"
+              value={displayName}
+            />
+          </Form.Field>
 
-        <input type="submit" value="sign up" />
-      </form>
+          <Form.Field>
+            <label htmlFor="signup_username">
+              username:
+            </label>
+            <input
+              id="signup_username"
+              name="username"
+              placeholder="username"
+              onChange={this.handleUsernameChange}
+              type="text"
+              value={username}
+            />
+          </Form.Field>
+
+          <Button type="submit">Sign up</Button>
+        </Form>
+      </Container>
     );
   }
 

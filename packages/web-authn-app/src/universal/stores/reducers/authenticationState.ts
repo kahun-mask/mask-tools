@@ -7,8 +7,11 @@ import {
   SIGN_UP_START,
   SIGN_UP_SUCCESS,
 } from '../actionTypes/authenticationActionTypes';
+import { AppState } from '../types/AppState';
 
-export const authenticationState = handleActions({
+export const authenticationState = handleActions<
+  AppState.AuthenticationState,
+  AppState.AuthenticationPayload>({
   [SIGN_IN_START](state, { payload }) {
     return { ...state, ...payload };
   },
@@ -27,4 +30,7 @@ export const authenticationState = handleActions({
   [SIGN_IN_FAILURE](state, { payload }) {
     return { ...state, ...payload };
   },
-}, {});
+}, {
+  authenticated: false,
+  name: '',
+});

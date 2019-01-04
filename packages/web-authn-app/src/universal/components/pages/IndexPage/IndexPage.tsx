@@ -1,19 +1,17 @@
 import * as React from 'react';
-import { SignInFormTemplate } from '../../templates/SignInFormTepmlate';
-import { SignUpFormTemplate } from '../../templates/SignUpFormTemplate';
+import { Container } from 'semantic-ui-react';
+import { DefaultHeader } from '../../templates/DefaultHeader';
+import { SignTab } from '../../templates/SignTab';
 
 export class IndexPage extends React.Component {
   public render() {
     return (
-      <React.Fragment>
-        <header>
-          <h1>Web Authn App</h1>
-        </header>
+      <Container>
+        <DefaultHeader />
         <main>
-          <SignUpFormTemplate />
-          <SignInFormTemplate />
+          <SignTab />
         </main>
-      </React.Fragment>
+      </Container>
     );
   }
 }
