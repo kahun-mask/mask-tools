@@ -6,6 +6,9 @@
   "author": "kahun-mask <kahun.mask@gmail.com>",
   "homepage": "",
   "license": "MIT",
+  "engines": {
+    "node": "10.15.0"
+  },
   "main": "lib/index.js",
   "directories": {
     "lib": "lib"
