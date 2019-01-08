@@ -17,7 +17,7 @@ spaRouter.get('*', asyncHandler(async (req: Request, res: Response) => {
 
   const html = await new Promise((resolve, reject) => {
     let body = '';
-    const store = createAppStore({});
+    const store = createAppStore();
     ReactDOM.renderToNodeStream(
       <Provider store={store}>
         <IndexPage />
@@ -27,6 +27,7 @@ spaRouter.get('*', asyncHandler(async (req: Request, res: Response) => {
     }).on('error', (error) => {
       reject(error);
     }).on('end', () => {
+      const state = store.getState();
       resolve(oneliner`
       <!doctype html>
       <html>
@@ -37,6 +38,7 @@ spaRouter.get('*', asyncHandler(async (req: Request, res: Response) => {
         </head>
         <body>
           <div id="app">${body}</div>
+          <script>window.__STATE__ = ${JSON.stringify(state)};</script>
           <script src="/static/app.js"></script>
         </body>
       </html>

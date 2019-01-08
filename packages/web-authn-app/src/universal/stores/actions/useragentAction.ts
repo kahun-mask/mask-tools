@@ -1,14 +1,19 @@
 import { createAction } from 'redux-actions';
 import { isServer } from '../../utils/useragentUtils';
 import { WEB_AUTHN_CHECK } from '../actionTypes/useragentActionTypes';
+import { AppState } from '../types/AppState';
 
-export const webAuthnCheck = createAction(WEB_AUTHN_CHECK, () => {
+export const webAuthnCheck = createAction<
+  AppState.UseragentPayload
+  >(WEB_AUTHN_CHECK, () => {
   if (isServer()) {
-    throw new Error('Cannot call is server.');
+    throw new Error('Cannot call in server.');
   }
-  const webAuthnSupported: boolean =
+  const webAuthnSupported: AppState.SupportedType = (
     !!(window as any).PublicKeyCredential &&
-    !!(window.navigator as any).credentials;
+    !!(window as any).CredentialsContainer &&
+    !!(window.navigator as any).credentials
+  ) ? 'supported' : 'unsupported';
   return {
     webAuthnSupported,
   };

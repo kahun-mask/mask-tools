@@ -7,16 +7,19 @@ import { selectRenderer } from './utils/reactUtils';
 
 (async () => {
 
-  const store = createAppStore({});
+  const store = createAppStore(window.__STATE__);
   const element = document.getElementById('app');
   const renderer = selectRenderer(element);
 
-  store.dispatch(webAuthnCheck());
   renderer(
     <Provider store={store}>
       <IndexPage />
     </Provider>,
     element,
+    () => {
+      // prepare
+      store.dispatch(webAuthnCheck());
+    },
   );
 
 })();

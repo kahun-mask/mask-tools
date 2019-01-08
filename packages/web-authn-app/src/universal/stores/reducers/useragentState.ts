@@ -4,10 +4,11 @@ import { AppState } from '../types/AppState';
 
 export const useragentState = handleActions<
   AppState.UseragentState,
-  AppState.AuthenticationPayload>({
+  AppState.UseragentPayload
+>({
   [WEB_AUTHN_CHECK](state, { payload }) {
     return { ...state, ...payload };
   },
 }, {
-  webAuthnSupported: false,
+  webAuthnSupported: 'pending',
 });

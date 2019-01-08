@@ -13,6 +13,7 @@ import {
   SIGN_UP_SUCCESS,
 } from '../actionTypes/authenticationActionTypes';
 import { AppState } from '../types/AppState';
+import { addNotificationItem } from './notificationPortalAction';
 
 export const signInStart = createAction<AppState.AuthenticationPayload>(
   SIGN_IN_START,
@@ -45,17 +46,27 @@ export const signInAction = (
   dispatch(signInStart());
 
   let result: boolean;
+  let message: string = '';
   try {
     result = await login(username);
   } catch (e) {
     console.error(e);
     result = false;
+    message = e.message;
   }
 
   if (result) {
     dispatch(signInSuccess());
+    dispatch(addNotificationItem({
+      title: 'Sign in: success',
+      message: 'Sign in succeed.'
+    }));
   } else {
     dispatch(signInFailure());
+    dispatch(addNotificationItem({
+      title: 'Sign in: failure',
+      message: message || 'Sign in failed.'
+    }));
   }
 };
 
@@ -91,16 +102,26 @@ export const signUpAction = (
   dispatch(signUpStart());
 
   let result: boolean;
+  let message: string = '';
   try {
     result = await register(displayName, username);
   } catch (e) {
     console.error(e);
     result = false;
+    message = e.message;
   }
 
   if (result) {
     dispatch(signUpSuccess());
+    dispatch(addNotificationItem({
+      title: 'Sign up: success',
+      message: 'Sign up succeed.'
+    }));
   } else {
     dispatch(signUpFailure());
+    dispatch(addNotificationItem({
+      title: 'Sign up: failure',
+      message: message || 'Sign up failed.',
+    }));
   }
 };

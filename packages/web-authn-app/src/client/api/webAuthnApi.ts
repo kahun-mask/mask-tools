@@ -5,6 +5,13 @@ import {
   preformatCredentialRequest,
 } from '@mask-tools/web-authn-helpers';
 
+const handleResponse = (response: Response) => {
+  if (response.ok) {
+    return response.json();
+  }
+  throw new Error(response.statusText);
+};
+
 export const registrationCredentialRequest = (
   body: string,
 ) => {
@@ -18,7 +25,7 @@ export const registrationCredentialRequest = (
       },
       method: 'POST',
     },
-  ).then((response) => response.json());
+  ).then(handleResponse);
 };
 
 export const registrationCredentialResponse = (
@@ -34,7 +41,7 @@ export const registrationCredentialResponse = (
       },
       method: 'POST',
     },
-  ).then((response) => response.json());
+  ).then(handleResponse);
 };
 
 export const loginCredentialRequest = (
@@ -50,7 +57,7 @@ export const loginCredentialRequest = (
       },
       method: 'POST',
     },
-  ).then((response) => response.json());
+  ).then(handleResponse);
 };
 
 export const loginCredentialResponse = (
@@ -66,58 +73,48 @@ export const loginCredentialResponse = (
       },
       method: 'POST',
     },
-  ).then((response) => response.json());
+  ).then(handleResponse);
 };
 
 export const register = async (
   name: string,
   username: string,
 ): Promise<boolean> => {
-  try {
-    const credentialOptions = await registrationCredentialRequest(
-      JSON.stringify({ name, username }),
-    );
+  const credentialOptions = await registrationCredentialRequest(
+    JSON.stringify({ name, username }),
+  );
 
-    const publicKey = preformatCredentialRequest(credentialOptions);
-    const publicKeyCredential = await (navigator as any).credentials.create({
-      publicKey,
-    });
-    const publicKeyCredentialJSON = authenticatorAttestationResponseToJSON(
-      publicKeyCredential,
-    );
+  const publicKey = preformatCredentialRequest(credentialOptions);
+  const publicKeyCredential = await (navigator as any).credentials.create({
+    publicKey,
+  });
+  const publicKeyCredentialJSON = authenticatorAttestationResponseToJSON(
+    publicKeyCredential,
+  );
 
-    await registrationCredentialResponse(
-      JSON.stringify(publicKeyCredentialJSON),
-    );
+  await registrationCredentialResponse(
+    JSON.stringify(publicKeyCredentialJSON),
+  );
 
-    return true;
-  } catch (e) {
-    console.error('Failed to register user', e);
-    return false;
-  }
+  return true;
 };
 
 export const login = async (
   username: string,
 ): Promise<boolean> => {
-  try {
-    const credentialOptions = await loginCredentialRequest(
-      JSON.stringify({ username }),
-    );
+  const credentialOptions = await loginCredentialRequest(
+    JSON.stringify({ username }),
+  );
 
-    const publicKey = preformatAssertionRequest(credentialOptions);
-    const publicKeyCredential = await (navigator as any).credentials.get({
-      publicKey,
-    });
-    const publicKeyCredentialJSON = authenticatorAssertionResponseToJSON(
-      publicKeyCredential,
-    );
+  const publicKey = preformatAssertionRequest(credentialOptions);
+  const publicKeyCredential = await (navigator as any).credentials.get({
+    publicKey,
+  });
+  const publicKeyCredentialJSON = authenticatorAssertionResponseToJSON(
+    publicKeyCredential,
+  );
 
-    await loginCredentialResponse(JSON.stringify(publicKeyCredentialJSON));
+  await loginCredentialResponse(JSON.stringify(publicKeyCredentialJSON));
 
-    return true;
-  } catch (e) {
-    console.error('Failed to login', e);
-    return false;
-  }
+  return true;
 };
