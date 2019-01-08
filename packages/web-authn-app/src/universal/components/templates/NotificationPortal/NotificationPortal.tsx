@@ -40,10 +40,10 @@ const NotificationPortalImpl: React.FunctionComponent<Props> = ({
         <Segment
           style={{
             left: '50%',
-            marginLeft: '-300px',
+            marginLeft: '-150px',
             position: 'fixed',
             top: '40%',
-            width: '600px',
+            width: '300px',
             zIndex: 1000,
           }}
         >

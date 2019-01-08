@@ -33,7 +33,7 @@ spaRouter.get('*', asyncHandler(async (req: Request, res: Response) => {
       <html>
         <head>
           <meta name="viewport" content="width=device-width,initial-scale=1" />
-          <title>web authn app</title>
+          <title>Psychic Web Authn</title>
           <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css" />
         </head>
         <body>

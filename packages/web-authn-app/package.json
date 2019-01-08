@@ -21,7 +21,7 @@
     "lint": "tslint -c tslint.json src",
     "build": "npm run build:client && npm run build:server",
     "build:server": "tsc",
-    "build:client": "webpack"
+    "build:client": "webpack -p"
   },
   "dependencies": {
     "@mask-tools/web-authn-helpers": "^0.0.0",
